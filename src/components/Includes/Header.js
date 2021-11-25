@@ -38,7 +38,7 @@ export default class Header extends React.Component {
                     Sorting Visualizer
                 </Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
-                    <Form>
+                    {/* <Form>
                         <Form.Check 
                             type="switch"
                             id="custom-switch"
@@ -48,7 +48,7 @@ export default class Header extends React.Component {
                     </Form>
                     <span className="dark-light">
                         <Image src={ this.getTheme() ? "./moon.png" : "./sun.png" } />
-                    </span>
+                    </span> */}
                     <Navbar.Text>
                         <a 
                             href="https://github.com/rdlugs" 
