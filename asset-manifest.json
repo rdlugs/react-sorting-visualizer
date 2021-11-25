@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/react-sorting-visualizer/static/css/main.f93b1d27.chunk.css",
-    "main.js": "/react-sorting-visualizer/static/js/main.37e8facd.chunk.js",
-    "main.js.map": "/react-sorting-visualizer/static/js/main.37e8facd.chunk.js.map",
+    "main.js": "/react-sorting-visualizer/static/js/main.d279b52c.chunk.js",
+    "main.js.map": "/react-sorting-visualizer/static/js/main.d279b52c.chunk.js.map",
     "runtime-main.js": "/react-sorting-visualizer/static/js/runtime-main.4c8fb4ca.js",
     "runtime-main.js.map": "/react-sorting-visualizer/static/js/runtime-main.4c8fb4ca.js.map",
     "static/css/2.b02c1629.chunk.css": "/react-sorting-visualizer/static/css/2.b02c1629.chunk.css",
-    "static/js/2.ba50c497.chunk.js": "/react-sorting-visualizer/static/js/2.ba50c497.chunk.js",
-    "static/js/2.ba50c497.chunk.js.map": "/react-sorting-visualizer/static/js/2.ba50c497.chunk.js.map",
+    "static/js/2.30b380f5.chunk.js": "/react-sorting-visualizer/static/js/2.30b380f5.chunk.js",
+    "static/js/2.30b380f5.chunk.js.map": "/react-sorting-visualizer/static/js/2.30b380f5.chunk.js.map",
     "index.html": "/react-sorting-visualizer/index.html",
     "static/css/2.b02c1629.chunk.css.map": "/react-sorting-visualizer/static/css/2.b02c1629.chunk.css.map",
     "static/css/main.f93b1d27.chunk.css.map": "/react-sorting-visualizer/static/css/main.f93b1d27.chunk.css.map",
-    "static/js/2.ba50c497.chunk.js.LICENSE.txt": "/react-sorting-visualizer/static/js/2.ba50c497.chunk.js.LICENSE.txt",
+    "static/js/2.30b380f5.chunk.js.LICENSE.txt": "/react-sorting-visualizer/static/js/2.30b380f5.chunk.js.LICENSE.txt",
     "static/media/App.css": "/react-sorting-visualizer/static/media/Montserrat-Regular.3cd78665.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.4c8fb4ca.js",
     "static/css/2.b02c1629.chunk.css",
-    "static/js/2.ba50c497.chunk.js",
+    "static/js/2.30b380f5.chunk.js",
     "static/css/main.f93b1d27.chunk.css",
-    "static/js/main.37e8facd.chunk.js"
+    "static/js/main.d279b52c.chunk.js"
   ]
 }
