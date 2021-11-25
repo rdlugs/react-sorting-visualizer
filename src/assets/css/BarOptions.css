@@ -1,0 +1,19 @@
+.bars-option {
+  border: 1px solid rgb(104, 104, 104);
+  padding-bottom: 20px;
+  border-radius: 5px;
+  background-color: rgb(75, 75, 75);
+  margin-bottom: 10px;
+  margin-top: 50px !important;
+}
+.range-slider:hover {
+  cursor: pointer;
+}
+.form-label {
+  color: white !important;
+}
+.btn {
+  margin-top: 35px;
+  margin-right: 5px;
+  box-shadow: 0px 0px 0px transparent !important;
+}

@@ -1,0 +1,32 @@
+/* Font Face */
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(../fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 900;
+  src: local("Montserrat"),
+    url(../fonts/Montserrat/Montserrat-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 900;
+  src: local("Montserrat"),
+    url(../fonts/Montserrat/Montserrat-Black.ttf) format("truetype");
+}
+
+/* Styles */
+html,
+body {
+  font-family: "Montserrat" !important;
+  font-size: 13px;
+  background-color: rgb(54, 54, 54);
+}
+
+@import url(./Header.css);
+@import url(./SortVisualizer.css);
+@import url(./BarOptions.css);
+@import url(./Bars.css);

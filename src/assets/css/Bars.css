@@ -1,0 +1,26 @@
+.bars {
+  height: 40vh !important;
+  display: flex;
+  justify-content: center;
+}
+
+.bar {
+  background-color: hsl(180, 100%, 82%);
+  margin-right: 3px;
+  display: inline-block;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+.bar:hover {
+  background-color: hsl(211, 98%, 67%);
+}
+
+.swap,
+.current,
+.tagged,
+.search {
+  background-color: tomato;
+}
+.sorted {
+  background-color: #adc3ff;
+}
