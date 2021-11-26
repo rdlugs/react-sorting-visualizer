@@ -31,21 +31,47 @@ import QuickSort from '../SortingAlgorithms/QuickSort'
 
 
 /**
- * Default array bars
+ * Array size options
  * Change this value to set default array bars
  * 
  */
-const DEFAULT_ARRAY_BARS = 50
+const MAX_ARRAY_SIZE = 200
+const MIN_ARRAY_SIZE = 10
+const DEFAULT_ARRAY_SIZE = 100 // default set array size must be less than max array size
+
+
+/**
+ * List of Algorithm Types
+ * 
+ */
+const ALGORITHM_TYPES = [
+    { value:"quickSort",        label:"Quick Sort" },
+    { value:"mergeSort",        label:"Merge Sort" },
+    { value:"insertionSort",    label:"Insertion Sort" },
+    { value:"selectionSort",    label:"Selection Sort" },
+    { value:"bubbleSort",       label:"Bubble Sort" },
+]
+
+const DEFAULT_ALGORITHM_TYPE = ALGORITHM_TYPES[0] // index of algorithm types
+
+
+/**
+ * List of Animation Speed
+ * 
+ */
+const ANIMATION_SPEED = [
+    { value:0.5,    label:"0.5x" },
+    { value:0.75,   label: "0.75x" },
+    { value:1,      label: "1x" },
+    { value:2,      label: "2x" },
+    { value:4,      label: "4x" },
+]
+
+const DEFAULT_ANIMATION_SPEED = ANIMATION_SPEED[4]
 
 class BarOptions extends Component {
     constructor(props) {
         super(props)
-
-        // Local States
-        this.state = {
-            SelectAlgorithmTypes: [],
-            SelectAnimationSpeed : []
-        }
 
         this.setArray           = this.setArray.bind(this)
         this.sort               = this.sort.bind(this)
@@ -55,54 +81,26 @@ class BarOptions extends Component {
     }
 
     componentDidMount(){
-        this.setSelectAlgorithmTypes()
-        this.setSelectAnimationSpeed()
         this.setAlgorithmType()
         this.setAnimationSpeed()
         this.setArrayBars()
     }
 
-    setSelectAlgorithmTypes() {
-        const types = []
-        types.push(
-            { value:"quickSort", label:"Quick Sort" },
-            { value:"mergeSort", label:"Merge Sort" },
-            { value:"insertionSort", label:"Insertion Sort" },
-            { value:"selectionSort", label:"Selection Sort" },
-            { value:"bubbleSort", label:"Bubble Sort" },
-        )
-        this.setState({ SelectAlgorithmTypes: types })
+    setAlgorithmType(algorithm = DEFAULT_ALGORITHM_TYPE) {
+        this.props.setAlgorithm(algorithm)
     }
 
-    setSelectAnimationSpeed() {
-        const speeds = []
-        speeds.push(
-            // { value:0.5, label:"0.5x" },
-            // { value:0.75, label: "0.75x" },
-            { value:1, label: "1x" },
-            { value:2, label: "2x" },
-            { value:4, label: "4x" },
-            // { value:8, label:"8x" }
-        )
-        this.setState({ SelectAnimationSpeed: speeds })
+    setAnimationSpeed(speed = DEFAULT_ANIMATION_SPEED) {
+        this.props.setAnimationSpeed(speed)
     }
 
-    setAlgorithmType(algorithm = "quickSort") {
-        const algorithmSelected = algorithm.value ? algorithm : {value:algorithm, label:"Quick Sort"}
-        this.props.setAlgorithm(algorithmSelected)
-    }
-
-    setAnimationSpeed(speed = 4) {
-        const speedSelected = speed.value ? speed : {value:speed, label:"4x"}
-        this.props.setAnimationSpeed(speedSelected)
-    }
-
-    setArrayBars(bars = DEFAULT_ARRAY_BARS) {
+    setArrayBars(bars = DEFAULT_ARRAY_SIZE) {
+        bars = (bars > MAX_ARRAY_SIZE) ? MAX_ARRAY_SIZE / 2 : bars
         this.props.setArrayBars(Number(bars))
         this.setArray(Number(bars))
     }
 
-    setArray(bars = null) {
+    setArray(bars) {
         const array = []
         const arrayBars = Number(bars) ? Number(bars) : Number(this.props.arrayBars)
         
@@ -115,15 +113,17 @@ class BarOptions extends Component {
     }
 
     sort() {
-        const { array, animationSpeed, algorithm } = this.props
+        const { array, animationSpeed, algorithm, sorted } = this.props
 
-        const doSort = algorithm.value === 'insertionSort' ? InsertionSort :
+        if(!sorted){
+            const doSort = algorithm.value === 'insertionSort' ? InsertionSort :
                 algorithm.value === 'selectionSort' ? SelectionSort :
                 algorithm.value === 'bubbleSort' ? BubbleSort :
                 algorithm.value === 'mergeSort' ? MergeSort : 
                 algorithm.value === 'quickSort' ? QuickSort : null
 
-        doSort(array, animationSpeed.value, algorithm.value)
+            doSort(array, animationSpeed.value, algorithm.value)
+        }
     }
 
     randomIntFromInterval(min, max) {
@@ -137,35 +137,18 @@ class BarOptions extends Component {
 
     render() {
 
-        const {SelectAlgorithmTypes, SelectAnimationSpeed} = this.state
         const {isRunning} = this.props
         
         return (
-            <Col className="bars-option shadow" md="8" lg= "8" sm="12">
+            <Col className="bars-option shadow">
                 <Form>
                     <Row>
-                        <Col md="12" lg="12" sm="12" className="mb-5">
-                            
-                            <RangeSlider
-                                className={isRunning ? "disabled" : ""}
-                                min={10} 
-                                max={100}
-                                value= {this.props.arrayBars}
-                                tooltipPlacement="top"
-                                tooltipLabel={currentValue => `Bars | ${currentValue}%`}
-                                size="sm"
-                                variant="info"                                
-                                onChange={e => this.setArrayBars(e.target.value)}
-                                onAfterChange={e => this.setArrayBars(e.target.value)}
-                                disabled={isRunning}
-                            />
-                        </Col>
                         <Col md="3" lg="3" sm="12">
                             <Form.Group className="mb-3" >
                                 <Form.Label>Sort Algorithm</Form.Label>
                                 <Select 
                                     onChange={this.setAlgorithmType}
-                                    options={SelectAlgorithmTypes}
+                                    options={ALGORITHM_TYPES}
                                     isDisabled={isRunning}
                                     placeholder="Select Algorithm"
                                     menuPlacement="auto"
@@ -179,7 +162,7 @@ class BarOptions extends Component {
                                 <Form.Label>Animation Speed</Form.Label>
                                 <Select 
                                     onChange={this.setAnimationSpeed}
-                                    options={SelectAnimationSpeed}
+                                    options={ANIMATION_SPEED}
                                     isDisabled={isRunning}
                                     menuPlacement="auto"
                                     placeholder="Select Speed"
@@ -188,19 +171,35 @@ class BarOptions extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col md="6" lg="6" sm="12">
+                        <Col md="3" lg="3" sm="12" >
+                            <Form.Label>Size</Form.Label>
+                            <RangeSlider
+                                className={isRunning ? "disabled" : ""}
+                                min={MIN_ARRAY_SIZE} 
+                                max={MAX_ARRAY_SIZE}
+                                value= {this.props.arrayBars}
+                                tooltipPlacement="top"
+                                tooltipLabel={currentValue => currentValue}
+                                size="sm"
+                                variant="info"                                
+                                onChange={e => this.setArrayBars(e.target.value)}
+                                onAfterChange={e => this.setArrayBars(e.target.value)}
+                                disabled={isRunning}
+                            />
+                        </Col>
+                        <Col md="3" lg="3" sm="12">
                             
                             <Button 
-                                className={`${isRunning ? "disabled" : ""} float-end`}
+                                className={`${isRunning ? "disabled" : ""} `}
                                 variant="success" 
                                 id="generate_array" 
                                 onClick={this.setArray}
                                 style={{ marginRight:"5px" }}>
-                                Generate Array
+                                New Array
                             </Button>
 
                             {isRunning ? <Button 
-                                className={`${!isRunning ? "disabled" : ""} float-end`} 
+                                className={`${!isRunning ? "disabled" : ""} `} 
                                 id="stop_sort" 
                                 variant="danger"
                                 onClick={this.stopSort}
@@ -208,7 +207,7 @@ class BarOptions extends Component {
                                 Stop
                             </Button> 
                             :<Button 
-                                className={`${isRunning ? "disabled" : ""} float-end`} 
+                                className={`${isRunning ? "disabled" : ""}`} 
                                 id="sort" 
                                 onClick={this.sort}
                                 variant="success"
@@ -233,7 +232,8 @@ const mapStateToProps = (state) => ({
     animationSpeed: state.animationSpeed,
     algorithm: state.algorithm,
     swappers: state.swappers,
-    isRunning: state.isRunning
+    isRunning: state.isRunning,
+    sorted: state.sorted
 })
 
 

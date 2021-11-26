@@ -1,5 +1,5 @@
 .bars {
-  height: 40vh !important;
+  height: 60vh !important;
   display: flex;
   justify-content: center;
 }
@@ -10,11 +10,12 @@
   display: inline-block;
   transition: all 0.1s ease;
   cursor: pointer;
+  border-radius: 3px;
+  transition: 1;
+  text-align: center;
+  font-weight: 600;
+  color: rgb(0, 135, 189);
 }
-.bar:hover {
-  background-color: hsl(211, 98%, 67%);
-}
-
 .swap,
 .current,
 .tagged,
@@ -22,5 +23,5 @@
   background-color: tomato;
 }
 .sorted {
-  background-color: #adc3ff;
+  background-color: #62fcc9;
 }

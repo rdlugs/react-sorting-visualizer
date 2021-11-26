@@ -40,24 +40,22 @@ class Bars extends Component {
                 sm="12"
                 >
                 { array.map((val, key) => {
+                    const width = window.innerWidth / this.props.arrayBars
+                    const classSwap = (!isSorted) ? (key === barOneIndex || key === barTwoIndex) ? " swap" : "" 
+                    : " sorted"
 
-                    const classSwap = (!isSorted) ? (key === barOneIndex || key === barTwoIndex) ? "swap" : "" 
-                    : "sorted"
-
-                    // for selection algorithm
-                    const searching = selectionSearchIndex === key ? "search" : ""
-                    const tagged = selectionTagIndex === key ? "tagged" : ""
-                    const current = selectionCurrentIndex === key ? "current" : ""
+                    const searching = selectionSearchIndex === key ? " search" : ""
+                    const tagged    = selectionTagIndex === key ? " tagged" : ""
+                    const current   = selectionCurrentIndex === key ? " current" : ""
                   
                     return <span 
-                        className={"bar " + classSwap + " " + searching + " " + tagged + " " + current}
+                        className={"bar" + classSwap + searching + tagged +  current}
                         key={key}
                         style={{
                             height: `${val}%`,
-                            borderRadius: '5px',
-                            transition: '1',
-                            width: `${50/this.props.arrayBars}%`
+                            width: `${width}%`
                         }}>
+                            {this.props.arrayBars <= 50 ? val :""}
                     </span>
                 }) }    
             </Col>
