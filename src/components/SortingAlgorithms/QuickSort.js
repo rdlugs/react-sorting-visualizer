@@ -22,6 +22,7 @@ function quickSortHelper(array, start, end, toDispatch){
     let i = start - 1
 
     for(let j = start; j <= end -1; j++){
+        toDispatch.push([ j, end ])
         if(array[j] < pivot){
             i++
             let lowVal = array[i]

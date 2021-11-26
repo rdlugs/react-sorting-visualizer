@@ -88,10 +88,17 @@ class BarOptions extends Component {
 
     setAlgorithmType(algorithm = DEFAULT_ALGORITHM_TYPE) {
         this.props.setAlgorithm(algorithm)
+
+        if(this.props.sorted)
+            this.setArray()
+        
     }
 
     setAnimationSpeed(speed = DEFAULT_ANIMATION_SPEED) {
         this.props.setAnimationSpeed(speed)
+
+        if(this.props.sorted)
+            this.setArray()
     }
 
     setArrayBars(bars = DEFAULT_ARRAY_SIZE) {
@@ -137,7 +144,7 @@ class BarOptions extends Component {
 
     render() {
 
-        const {isRunning} = this.props
+        const {isRunning, sorted} = this.props
         
         return (
             <Col className="bars-option shadow">
@@ -207,7 +214,7 @@ class BarOptions extends Component {
                                 Stop
                             </Button> 
                             :<Button 
-                                className={`${isRunning ? "disabled" : ""}`} 
+                                className={`${isRunning || sorted ? "disabled" : ""}`} 
                                 id="sort" 
                                 onClick={this.sort}
                                 variant="success"

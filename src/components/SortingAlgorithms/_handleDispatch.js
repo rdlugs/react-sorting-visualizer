@@ -27,13 +27,13 @@ import {
 
 function handleDispatch(toDispatch, array, animationSpeed, algorithm) {
     const speed = 100 / animationSpeed
-    let isDone = 0
+    let timeOut = 0
 
     store.dispatch(setRunning(true))
     store.dispatch(setSorted(false))
 
     for(let i=0; i < toDispatch.length; i++) {
-        isDone = i * speed
+        timeOut = i * speed
 
         // Swapping Values
         if(Array.isArray(toDispatch[i][0])) 
@@ -58,7 +58,7 @@ function handleDispatch(toDispatch, array, animationSpeed, algorithm) {
 
             }, i * speed))
         }
-        else
+        else //comparing
         {
             switch(algorithm)
             {
@@ -107,7 +107,7 @@ function handleDispatch(toDispatch, array, animationSpeed, algorithm) {
             store.dispatch(clearSelectionTagIndex())
         }
 
-    }, isDone))
+    }, timeOut))
 
     // add Timeouts to store
     store.dispatch(addTimeout(Timeouts))

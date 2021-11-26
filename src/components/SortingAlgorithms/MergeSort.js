@@ -44,13 +44,13 @@ function doMerge(mainArray, auxArr, startidx, mididx, endidx, toDispatch){
     }
 
     while (idx2 <= mididx) {
-        toDispatch.push([idx2, idx2]);
+        toDispatch.push([idx2, mididx]);
         toDispatch.push([[idx1, auxArr[idx2]]]);
         mainArray[idx1++] = auxArr[idx2++];
     }
     
     while (idx3 <= endidx) {
-        toDispatch.push([idx3, idx3]);
+        toDispatch.push([idx3, endidx]);
         toDispatch.push([[idx1, auxArr[idx3]]]);
         mainArray[idx1++] = auxArr[idx3++];
     }
